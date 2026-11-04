@@ -1,4 +1,4 @@
-# ringkv
+# Ring Key-Value Store
 
 A small **Dynamo-style distributed key-value store** written in Python (standard library only, no dependencies).
 Keys are partitioned with **consistent hashing**, replicated to **N nodes**, and read/written at a
