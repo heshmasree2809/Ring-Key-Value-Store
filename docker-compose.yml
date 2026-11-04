@@ -1,0 +1,46 @@
+# 5-node ringkv cluster on one machine.
+#   docker compose up -d --build
+#   curl -X PUT 'localhost:8001/kv/hello?consistency=quorum' -d '{"value":"world"}'
+#   curl 'localhost:8003/kv/hello'
+# Optional shared secret:  RINGKV_TOKEN=changeme docker compose up -d
+x-node: &node
+  build: .
+  restart: unless-stopped
+  environment: &env
+    RINGKV_PEERS: "node1=node1:8000,node2=node2:8000,node3=node3:8000,node4=node4:8000,node5=node5:8000"
+    RINGKV_REPLICATION: "3"
+    RINGKV_TOKEN: "${RINGKV_TOKEN:-}"
+
+services:
+  node1:
+    <<: *node
+    environment: { <<: *env, RINGKV_ID: node1 }
+    ports: ["8001:8000"]
+    volumes: ["node1-data:/data"]
+  node2:
+    <<: *node
+    environment: { <<: *env, RINGKV_ID: node2 }
+    ports: ["8002:8000"]
+    volumes: ["node2-data:/data"]
+  node3:
+    <<: *node
+    environment: { <<: *env, RINGKV_ID: node3 }
+    ports: ["8003:8000"]
+    volumes: ["node3-data:/data"]
+  node4:
+    <<: *node
+    environment: { <<: *env, RINGKV_ID: node4 }
+    ports: ["8004:8000"]
+    volumes: ["node4-data:/data"]
+  node5:
+    <<: *node
+    environment: { <<: *env, RINGKV_ID: node5 }
+    ports: ["8005:8000"]
+    volumes: ["node5-data:/data"]
+
+volumes:
+  node1-data:
+  node2-data:
+  node3-data:
+  node4-data:
+  node5-data:

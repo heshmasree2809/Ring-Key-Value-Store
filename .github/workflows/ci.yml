@@ -1,0 +1,44 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Unit and fault-injection tests
+        run: python -m unittest discover -s tests -t . -v
+
+  docker-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start the 5-node cluster
+        run: docker compose up -d --build
+      - name: Wait for nodes
+        run: |
+          for port in 8001 8002 8003 8004 8005; do
+            for i in $(seq 1 30); do
+              curl -fs "localhost:$port/health" && break
+              sleep 1
+            done
+          done
+      - name: Write on one node, read from another
+        run: |
+          curl -fsS -X PUT 'localhost:8001/kv/hello?consistency=quorum' -d '{"value":"world"}'
+          curl -fsS 'localhost:8003/kv/hello' | grep world
+      - name: Survive a node failure
+        run: |
+          docker compose stop node2
+          curl -fsS -X PUT 'localhost:8001/kv/during-outage?consistency=quorum' -d '{"value":"ok"}'
+          curl -fsS 'localhost:8004/kv/during-outage' | grep ok
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs
+      - run: docker compose down -v
