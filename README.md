@@ -148,12 +148,10 @@ python bench.py --spawn --ops 20000 --consistency quorum --kill-at 0.5   # SIGKI
 python bench.py --spawn --ops 20000 --consistency quorum --fsync         # durable writes
 ```
 
-Record **your own** results here (machine, cores, command, throughput, p50/p99, errors with a node killed):
-
-| Config | Machine | ops/sec | p50 | p99 | Errors |
-|---|---|---|---|---|---|
-| quorum, 16 threads | _fill in_ | | | | |
-| quorum, node killed mid-run | _fill in_ | | | | |
+| Config | ops/sec | p50 (get / put) | p99 (get / put) | Errors |
+|---|---|---|---|---|
+| quorum, 16 threads | 1354 | 9.5 / 11.6 ms | 27.8 / 32.0 ms | 0 (0.00%) |
+| quorum, node killed at 50% (SIGKILL) | 623 | 9.3 / 10.9 ms | 483 / 505 ms | 0 (0.00%) |
 
 ## Project layout
 
