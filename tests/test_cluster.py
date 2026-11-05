@@ -1,4 +1,4 @@
-"""Integration tests: real node processes on localhost, with real crashes."""
+""""Integration tests:real node processes on localhost, with real crashes.""""
 import tempfile
 import time
 import unittest
