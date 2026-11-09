@@ -86,6 +86,7 @@ class PeerClient:
         if self.token:
             headers["X-Auth-Token"] = self.token
         data = json.dumps(body).encode("utf-8") if body is not None else None
+        
         for attempt in (0, 1):
             conn = self._conn(peer)
             was_used = conn.used
