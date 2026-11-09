@@ -542,8 +542,7 @@ def main(argv=None):
     ap.add_argument("--bind", default=env("RINGKV_BIND", "0.0.0.0"))
     ap.add_argument("--replication", type=int, default=int(env("RINGKV_REPLICATION", 3)))
     ap.add_argument("--vnodes", type=int, default=int(env("RINGKV_VNODES", 128)))
-    ap.add_argument("--timeout", type=float, default=float(env("RINGKV_TIMEOUT", 1.0)),
-                    help="per-replica RPC timeout in seconds")
+    ap.add_argument("--timeout", type=float, default=float(env("RINGKV_TIMEOUT", 1.0)),help="per-replica RPC timeout in seconds")
     ap.add_argument("--heartbeat", type=float, default=float(env("RINGKV_HEARTBEAT", 1.0)))
     ap.add_argument("--fsync", choices=["always", "none"], default=env("RINGKV_FSYNC", "always"))
     ap.add_argument("--token", default=env("RINGKV_TOKEN") or None,
