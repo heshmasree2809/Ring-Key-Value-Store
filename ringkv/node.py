@@ -247,6 +247,7 @@ class Node:
             if replica == self.id:
                 self.apply_local(rec)
                 return True
+                
             status, _ = self.rpc.request(replica, "POST", "/internal/put", rec)
             return status == 200
         except Exception:   # any failure means "this replica did not ack"
