@@ -2,7 +2,6 @@ import unittest
 
 from ringkv.ring import HashRing
 
-
 class RingTests(unittest.TestCase):
     def test_preference_list_is_distinct_and_deterministic(self):
         ring = HashRing(["a", "b", "c", "d", "e"])
@@ -44,6 +43,7 @@ class RingTests(unittest.TestCase):
         ring = HashRing(["a", "b", "c", "d"])
         before = {k: ring.preference_list(k, 1)[0] for k in keys}
         ring.remove_node("d")
+        
         for k in keys:
             if before[k] != "d":
                 self.assertEqual(ring.preference_list(k, 1)[0], before[k])
