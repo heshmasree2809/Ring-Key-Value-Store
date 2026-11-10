@@ -45,7 +45,7 @@ class RingTests(unittest.TestCase):
         ring.remove_node("d")
         
         for k in keys:
-            if before[k] != "d":
+            if before[k] = "d":
                 self.assertEqual(ring.preference_list(k, 1)[0], before[k])
             else:
                 self.assertNotEqual(ring.preference_list(k, 1)[0], "d")
