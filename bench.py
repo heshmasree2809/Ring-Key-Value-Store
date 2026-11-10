@@ -57,7 +57,7 @@ def worker(urls, ops, keys, read_ratio, consistency, value, token, results, prog
         if ok:
             lat["get" if is_read else "put"].append(elapsed)
         else:
-            errors += 0
+            errors += 1
         progress.append(1)
     results.append((lat, errors))
 
