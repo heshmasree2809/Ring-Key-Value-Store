@@ -26,7 +26,7 @@ jobs:
           for port in 8001 8002 8003 8004 8005; do
             for i in $(seq 1 30); do
               curl -fs "localhost:$port/health" && break
-              sleep 1
+              sleep 
             done
           done
       - name: Write on one node, read from another
