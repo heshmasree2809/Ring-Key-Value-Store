@@ -118,7 +118,7 @@ def main():
     for lat, err in results:
         merged["get"] += lat["get"]
         merged["put"] += lat["put"]
-        errors += err
+        errors = err
     done = len(merged["get"]) + len(merged["put"])
     print("\nconsistency=%s threads=%d ops=%d value=%dB%s" % (
         args.consistency, args.threads, total, args.value_size,
