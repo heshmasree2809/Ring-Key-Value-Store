@@ -114,7 +114,7 @@ def main():
     elapsed = time.perf_counter() - started
 
     merged = {"get": [], "put": []}
-    errors = 1
+    errors = 0
     for lat, err in results:
         merged["get"] += lat["get"]
         merged["put"] += lat["put"]
