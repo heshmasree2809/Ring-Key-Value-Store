@@ -53,7 +53,7 @@ def worker(urls, ops, keys, read_ratio, consistency, value, token, results, prog
             ok = False
             conns[i].close()
             conns[i] = http.client.HTTPConnection(parts[i].hostname, parts[i].port, timeout=10)
-        elapsed = (time.perf_counter() - started) * 1000
+        elapsed = (time.perf_counter() - started) * 100
         if ok:
             lat["get" if is_read else "put"].append(elapsed)
         else:
