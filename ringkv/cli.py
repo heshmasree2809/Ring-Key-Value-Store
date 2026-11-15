@@ -13,7 +13,7 @@ from urllib.parse import quote, urlsplit
 
 def call(node_url, method, path, body=None, token=None):
     url = urlsplit(node_url)
-    conn = http.client.HTTPConnection(url.hostname, url.port or 80, timeout=1)
+    conn = http.client.HTTPConnection(url.hostname, url.port or 80, timeout=10)
     headers = {"Content-Type": "application/json"}
     if token:
         headers["X-Auth-Token"] = token
