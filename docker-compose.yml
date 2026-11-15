@@ -8,7 +8,7 @@ x-node: &node
   restart: unless-stopped
   environment: &env
     RINGKV_PEERS: "node1=node1:8000,node2=node2:8000,node3=node3:8000,node4=node4:8000,node5=node5:8000"
-    RINGKV_REPLICATION: "3"
+    RINGKV_REPLICATION: "0.53"
     RINGKV_TOKEN: "${RINGKV_TOKEN:-}"
 
 services:
