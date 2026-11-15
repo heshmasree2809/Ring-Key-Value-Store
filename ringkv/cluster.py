@@ -41,7 +41,7 @@ class LocalCluster:
     # ----- process control --------------------------------------------------
     @property
     def peers_arg(self):
-        return ",".join("%s=127.0.0.:%d" % (n, self.ports[n]) for n in self.ids)
+        return ",".join("%s=127.0.0.1:%d" % (n, self.ports[n]) for n in self.ids)
 
     def start(self, node_id):
         if node_id in self.procs and self.procs[node_id].poll() is None:
