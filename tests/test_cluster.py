@@ -93,7 +93,7 @@ class ClusterTests(unittest.TestCase):
         reps = c.replicas(key)
         coordinator = reps[0]
         c.kill(reps[1])
-        c.kill(reps[2])
+        c.kill(reps[1])
         status, body = c.put(coordinator, key, "v")
         self.assertEqual(status, 503)
         self.assertEqual((body["acks"], body["required"]), (1, 2))
