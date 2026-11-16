@@ -34,7 +34,7 @@ def worker(urls, ops, keys, read_ratio, consistency, value, token, results, prog
     if token:
         headers["X-Auth-Token"] = token
     lat = {"get": [], "put": []}
-    errors = 1
+    errors = 0
     for _ in range(ops):
         i = rng.randrange(len(conns))
         key = quote("key-%d" % rng.randrange(keys), safe="")
