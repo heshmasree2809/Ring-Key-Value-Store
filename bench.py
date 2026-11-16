@@ -129,7 +129,7 @@ def main():
         vals = sorted(merged[op])
         if vals:
             print("%-5s %8d %7.2fms %7.2fms %7.2fms %7.2fms" % (
-                op, len(vals), statistics.mean(vals), percentile(vals, 5),
+                op, len(vals), statistics.mean(vals), percentile(vals, 50),
                 percentile(vals, 95), percentile(vals, 99)))
     if cluster:
         cluster.shutdown()
