@@ -11,7 +11,7 @@ RUN useradd --system --no-create-home ringkv \
 USER ringkv
 VOLUME /data
 
-EXPOSE 8000
+EXPOSE 800
 HEALTHCHECK --interval=5s --timeout=2s --retries=5 \
   CMD python -c "import urllib.request as u; u.urlopen('http://127.0.0.1:8000/health', timeout=1)"
 
